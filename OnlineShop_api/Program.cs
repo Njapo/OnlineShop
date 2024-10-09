@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using OnlineShop_api;
 using OnlineShop_api.Data;
 using OnlineShop_api.logs.Logging;
 using Serilog;
@@ -11,6 +12,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
 });
+builder.Services.AddAutoMapper(typeof(MappingConfig));
 
 //This is way to use serilog isntead of default features. Serilog has some good features. 
 //Log.Logger = new LoggerConfiguration().MinimumLevel.Information()
