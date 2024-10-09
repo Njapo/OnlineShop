@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using OnlineShop_api;
 using OnlineShop_api.Data;
 using OnlineShop_api.logs.Logging;
+using OnlineShop_api.Repository;
+using OnlineShop_api.Repository.IRepository;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
 });
+builder.Services.AddScoped<IItemRepository,ItemRepository>();
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 
 //This is way to use serilog isntead of default features. Serilog has some good features. 

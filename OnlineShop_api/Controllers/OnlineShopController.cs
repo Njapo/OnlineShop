@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using OnlineShop_api.Data;
 using OnlineShop_api.logs.Logging;
 using OnlineShop_api.Models;
+using OnlineShop_api.Repository.IRepository;
 
 namespace OnlineShop_api.Controllers
 {
@@ -9,9 +12,13 @@ namespace OnlineShop_api.Controllers
     [ApiController]
     public class OnlineShopController : ControllerBase
     {
+        private readonly IItemRepository _dbItem;
+        private readonly IMapper _mapper;
         private readonly ILogging _logger; 
-        public OnlineShopController(ILogging logger)
+        public OnlineShopController(ILogging logger, IItemRepository dbItem, IMapper mapper)
         {
+            _mapper= mapper;
+            _dbItem= dbItem;
             _logger = logger; 
         }
 
