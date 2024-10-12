@@ -34,7 +34,6 @@ namespace OnlineShop_api.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -42,7 +41,6 @@ namespace OnlineShop_api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhotoUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
@@ -62,57 +60,57 @@ namespace OnlineShop_api.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 10, 9, 1, 50, 45, 861, DateTimeKind.Local).AddTicks(9572),
+                            CreatedDate = new DateTime(2024, 10, 12, 22, 10, 44, 143, DateTimeKind.Local).AddTicks(5890),
                             Description = "Latest smartphone with 128GB storage",
                             Name = "Smartphone",
                             PhotoUrl = "/Images/Items/smartphone.jpg",
                             Price = 599.99m,
                             Quantity = 50,
-                            UpdatedDate = new DateTime(2024, 10, 9, 1, 50, 45, 861, DateTimeKind.Local).AddTicks(9583)
+                            UpdatedDate = new DateTime(2024, 10, 12, 22, 10, 44, 143, DateTimeKind.Local).AddTicks(5900)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 10, 9, 1, 50, 45, 861, DateTimeKind.Local).AddTicks(9585),
+                            CreatedDate = new DateTime(2024, 10, 12, 22, 10, 44, 143, DateTimeKind.Local).AddTicks(5902),
                             Description = "High-performance laptop for gaming and work",
                             Name = "Laptop",
                             PhotoUrl = "/Images/Items/laptop.jpg",
                             Price = 1299.99m,
                             Quantity = 30,
-                            UpdatedDate = new DateTime(2024, 10, 9, 1, 50, 45, 861, DateTimeKind.Local).AddTicks(9586)
+                            UpdatedDate = new DateTime(2024, 10, 12, 22, 10, 44, 143, DateTimeKind.Local).AddTicks(5902)
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 10, 9, 1, 50, 45, 861, DateTimeKind.Local).AddTicks(9587),
+                            CreatedDate = new DateTime(2024, 10, 12, 22, 10, 44, 143, DateTimeKind.Local).AddTicks(5904),
                             Description = "Noise-cancelling over-ear headphones",
                             Name = "Headphones",
                             PhotoUrl = "/Images/Items/headphones.jpeg",
                             Price = 199.99m,
                             Quantity = 100,
-                            UpdatedDate = new DateTime(2024, 10, 9, 1, 50, 45, 861, DateTimeKind.Local).AddTicks(9588)
+                            UpdatedDate = new DateTime(2024, 10, 12, 22, 10, 44, 143, DateTimeKind.Local).AddTicks(5904)
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2024, 10, 9, 1, 50, 45, 861, DateTimeKind.Local).AddTicks(9589),
+                            CreatedDate = new DateTime(2024, 10, 12, 22, 10, 44, 143, DateTimeKind.Local).AddTicks(5906),
                             Description = "Waterproof smartwatch with heart rate monitor",
                             Name = "Smartwatch",
                             PhotoUrl = "/Images/Items/smartwatch.jpg",
                             Price = 149.99m,
                             Quantity = 75,
-                            UpdatedDate = new DateTime(2024, 10, 9, 1, 50, 45, 861, DateTimeKind.Local).AddTicks(9590)
+                            UpdatedDate = new DateTime(2024, 10, 12, 22, 10, 44, 143, DateTimeKind.Local).AddTicks(5906)
                         },
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2024, 10, 9, 1, 50, 45, 861, DateTimeKind.Local).AddTicks(9592),
+                            CreatedDate = new DateTime(2024, 10, 12, 22, 10, 44, 143, DateTimeKind.Local).AddTicks(5907),
                             Description = "Digital SLR camera with 24.2 MP sensor",
                             Name = "Camera",
-                            PhotoUrl = "/Images/Items/camera.jpg",
+                            PhotoUrl = "/Images/Items/camera.jpeg",
                             Price = 899.99m,
                             Quantity = 20,
-                            UpdatedDate = new DateTime(2024, 10, 9, 1, 50, 45, 861, DateTimeKind.Local).AddTicks(9592)
+                            UpdatedDate = new DateTime(2024, 10, 12, 22, 10, 44, 143, DateTimeKind.Local).AddTicks(5908)
                         });
                 });
 #pragma warning restore 612, 618

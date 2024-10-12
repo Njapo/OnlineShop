@@ -1,0 +1,71 @@
+﻿@model OnlineShop_Web.Models.ItemCreateDTO
+
+@{
+    ViewData["Title"] = "Create New Item";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3>Create New Item</h3>
+                </div>
+                <div class="card-body">
+                    <!-- Form start -->
+                    <form asp-action="CreateItem" method="post">
+                        @Html.AntiForgeryToken()
+
+                        <!-- Name -->
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label">Item Name</label>
+                            <input asp-for="Name" class="form-control" placeholder="Enter the item name" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label">Description</label>
+                            <textarea asp-for="Description" class="form-control" rows="4" placeholder="Enter a description"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="mb-3">
+                            <label asp-for="Price" class="form-label">Price</label>
+                            <input asp-for="Price" class="form-control" placeholder="Enter the price" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+
+                        <!-- Quantity -->
+                        <div class="mb-3">
+                            <label asp-for="Quantity" class="form-label">Quantity</label>
+                            <input asp-for="Quantity" class="form-control" placeholder="Enter the quantity" />
+                            <span asp-validation-for="Quantity" class="text-danger"></span>
+                        </div>
+
+                        <!-- Photo URL -->
+                        <div class="mb-3">
+                            <label asp-for="PhotoUrl" class="form-label">Photo URL</label>
+                            <input asp-for="PhotoUrl" class="form-control" placeholder="Enter the photo URL" />
+                            <span asp-validation-for="PhotoUrl" class="text-danger"></span>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-save me-2"></i> Save Item
+                            </button>
+                        </div>
+                    </form>
+                    <!-- Form end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-GLyuvrFlXZ0/y/Y8+jjRIpZTzPpYVIepmB7VVoM80tYPHwh/D5y4eYpDwi8aivcj" crossorigin="anonymous"></script>
+    <!-- Add validation scripts here if needed -->
+}

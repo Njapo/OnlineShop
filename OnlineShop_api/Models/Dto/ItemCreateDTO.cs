@@ -1,7 +1,11 @@
-﻿namespace OnlineShop_api.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OnlineShop_api.Models
 {
     public class ItemCreateDTO
     {
+        [Required]
+        [MaxLength(30)]
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }

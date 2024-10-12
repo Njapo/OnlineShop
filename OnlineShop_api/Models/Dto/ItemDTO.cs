@@ -1,8 +1,12 @@
-﻿namespace OnlineShop_api.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OnlineShop_api.Models
 {
     public class ItemDTO
     {
-        public int Id { get; set; }                  
+        public int Id { get; set; }
+        [Required]
+        [MaxLength(30)]
         public string Name { get; set; }              
         public string Description { get; set; }       
         public decimal Price { get; set; }            

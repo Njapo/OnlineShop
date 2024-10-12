@@ -65,7 +65,7 @@ namespace OnlineShop_api.Data
                 Description = "Digital SLR camera with 24.2 MP sensor",
                 Price = 899.99m,
                 Quantity = 20,
-                PhotoUrl = "/Images/Items/camera.jpg",
+                PhotoUrl = "/Images/Items/camera.jpeg",
                 CreatedDate = DateTime.Now,
                 UpdatedDate = DateTime.Now
             });
