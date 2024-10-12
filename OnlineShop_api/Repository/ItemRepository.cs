@@ -12,6 +12,7 @@ namespace OnlineShop_api.Repository
         public ItemRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
+
         }
 
         public async Task<Item> Update(Item entity)
