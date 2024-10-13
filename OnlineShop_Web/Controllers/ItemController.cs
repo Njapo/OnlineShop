@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using OnlineShop_Web.Models;
 using OnlineShop_Web.Services.IServices;
+using System.Reflection;
 
 namespace OnlineShop_Web.Controllers
 {
@@ -43,6 +44,46 @@ namespace OnlineShop_Web.Controllers
                 }
             }
             return View(model);
+        }
+
+        public async Task<IActionResult> UpdateItem(int itemId)
+        {
+            var response = await _itemService.GetAsync<APIResponse>(itemId);
+            if (response != null && response.IsSuccess)
+            {
+                ItemDTO model=JsonConvert.DeserializeObject<ItemDTO>(Convert.ToString(response.Result));
+                return View(_mapper.Map<ItemUpdateDTO>(model));
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateItem(ItemUpdateDTO model)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _itemService.UpdateAsync<APIResponse>(model);
+                if (response != null && response.IsSuccess)
+                {
+                    return RedirectToAction(nameof(IndexItem));
+                }
+            }
+            return View(model);
+        }
+
+
+        public async Task<IActionResult> DeleteItem(int itemId)
+        {
+            var response = await _itemService.GetAsync<APIResponse>(itemId);
+            if (response != null && response.IsSuccess)
+            {
+                ItemDTO model = JsonConvert.DeserializeObject<ItemDTO>(Convert.ToString(response.Result));
+                await _itemService.DeleteAsync<APIResponse>(model.Id);
+                
+                return RedirectToAction(nameof(IndexItem));
+            }
+            return NotFound();
         }
 
     }

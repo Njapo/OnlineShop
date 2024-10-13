@@ -44,8 +44,10 @@
                     <td>
                         <!-- Action buttons -->
                         <a href="/Items/Details/@item.Id" class="btn btn-info btn-sm">Details</a>
-                        <a href="/Items/Edit/@item.Id" class="btn btn-warning btn-sm">Edit</a>
-                        <a href="/Items/Delete/@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                        <a asp-action="UpdateItem" asp-route-itemId="@item.Id" class="btn btn-warning btn-sm">Edit</a>
+
+                        <!-- Delete button -->
+                        <a asp-action="DeleteItem" asp-route-itemId="@item.Id" class="btn btn-danger btn-sm">Delete</a>
                     </td>
                 </tr>
             }
