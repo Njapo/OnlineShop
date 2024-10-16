@@ -9,6 +9,8 @@ using OnlineShop_api.Repository.IRepository;
 using System.Net;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Authorization;
+using OnlineShop_api.Enums;
 
 namespace OnlineShop_api.Controllers
 {
@@ -78,6 +80,9 @@ namespace OnlineShop_api.Controllers
         }
         
         [HttpPost]
+        [Authorize(Roles ="Admin,Moderator" )]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
@@ -111,6 +116,9 @@ namespace OnlineShop_api.Controllers
         }
 
         [HttpDelete("{id:int}",Name ="DeleteItem")]
+        [Authorize(Roles = "Admin,Moderator")]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -145,7 +153,10 @@ namespace OnlineShop_api.Controllers
             return _response;
         }
 
-        [HttpPut("id:int",Name ="UpdateItem")]
+        [HttpPut("{id:int}",Name ="UpdateItem")]
+        [Authorize(Roles = "Admin,Moderator")]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<APIResponse>> UpdateItem(int id, [FromBody]ItemUpdateDTO itemUpdate)

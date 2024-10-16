@@ -1,0 +1,110 @@
+﻿@model OnlineShop_Web.Models.Dto.LoginRequestDTO
+
+@{
+    ViewBag.Title = "User Login";
+}
+
+<!-- Custom CSS for additional styling -->
+<style>
+    body {
+        background-color: #f5f7fa;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .login-container {
+        max-width: 500px;
+        margin: 50px auto;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+    }
+
+    .login-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+        .login-header h2 {
+            color: #007bff;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+    .form-group label {
+        font-weight: 500;
+        color: #495057;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        font-size: 16px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        padding: 10px 15px;
+        width: 100%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .form-text {
+        font-size: 12px;
+        color: #6c757d;
+    }
+
+    .login-footer {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+        .login-footer a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+            .login-footer a:hover {
+                color: #0056b3;
+            }
+</style>
+
+<div class="container">
+    <div class="login-container">
+        <div class="login-header">
+            <h2>User Login</h2>
+            
+        </div>
+
+        @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
+        {
+            <div class="form-group mb-3">
+                @Html.LabelFor(m => m.UserName, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Enter your username" })
+                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group mb-3">
+                @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Enter your password" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+        }
+
+        <div class="login-footer mt-3">
+            <p>Don't have an account? <a asp-action="Register" class="btn btn-warning btn-sm">Register</a></p>
+        </div> 
+    </div>
+</div>

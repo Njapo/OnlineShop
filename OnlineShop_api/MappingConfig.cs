@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using OnlineShop_api.Models;
+using OnlineShop_api.Models.Dto;
 
 namespace OnlineShop_api
 {
@@ -11,6 +12,7 @@ namespace OnlineShop_api
             CreateMap<Item, ItemCreateDTO>().ReverseMap();
             CreateMap<Item, ItemUpdateDTO>().ReverseMap();
 
+            CreateMap<LocalUser,RegistrationRequstDTO>().ReverseMap();
         }
     }
 }

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.FileProviders;
 using OnlineShop_api;
 using OnlineShop_Web.Services;
@@ -11,6 +12,24 @@ builder.Services.AddAutoMapper(typeof(MappingConfig));
 
 builder.Services.AddHttpClient<IItemService,ItemService>();
 builder.Services.AddScoped<IItemService, ItemService>();
+
+builder.Services.AddHttpClient<IAuthService, AuthService>();
+builder.Services.AddScoped<IAuthService,AuthService>();
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(100);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Auth/Login";
+        options.LogoutPath = "/Auth/LogOut"; 
+    });
 
 var app = builder.Build();
 
@@ -32,13 +51,14 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/Images"
 });
 
+
 app.UseRouting();
 
 app.UseAuthorization();
-
+app.UseSession();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Item}/{action=IndexItem}/{id?}");
 
 
 app.Run();

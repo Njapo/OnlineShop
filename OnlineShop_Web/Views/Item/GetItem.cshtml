@@ -1,0 +1,77 @@
+﻿@model ItemDTO
+
+@{
+    ViewData["Title"] = "Product Details";
+    var apiBaseUrl = "https://localhost:7002";
+}
+
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Card for displaying product details -->
+            <div class="card shadow-lg">
+                <!-- Product Image -->
+                <div class="image-container">
+                    <img src="@($"{apiBaseUrl}{@Model.PhotoUrl}")" class="img-fluid" alt="@Model.Name">
+                </div>
+
+                <div class="card-body">
+                    <!-- Product Name -->
+                    <h3 class="card-title text-center mb-4">@Model.Name</h3>
+
+                    <!-- Product Description -->
+                    <p class="card-text">
+                        <strong>Description:</strong> @Model.Description
+                    </p>
+
+                    <!-- Price and Quantity -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h4 class="text-danger">$@Model.Price.ToString("0.00")</h4>
+                        <span class="badge bg-primary fs-6">In Stock: @Model.Quantity</span>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex justify-content-center gap-3">
+                        <!-- Add to Cart Button -->
+                        <form asp-controller="Cart" asp-action="AddToCart" method="post">
+                            <input type="hidden" name="id" value="@Model.Id" />
+                            <button type="submit" class="btn btn-lg btn-success px-4">
+                                <i class="bi bi-cart-fill"></i> Add to Cart
+                            </button>
+                        </form>
+
+                        <!-- Back to Items List -->
+                        <a href="@Url.Action("IndexItem", "Item")" class="btn btn-lg btn-secondary px-4">
+                            <i class="bi bi-arrow-left"></i> Back to Items
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+<!-- Custom CSS to handle image responsiveness -->
+<style>
+    .image-container {
+        width: 100%;
+        height: 400px; /* Ensures consistent image size */
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f5f5f5; /* Optional: light background */
+    }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Ensures full image is visible, not cut off */
+        }
+</style>

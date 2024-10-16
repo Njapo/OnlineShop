@@ -1,67 +1,105 @@
 ﻿@model List<OnlineShop_Web.Models.ItemDTO>
 @{
-    ViewData["Title"] = "Products";
     var apiBaseUrl = "https://localhost:7002";  // Base URL for your API project
 }
 
-<h2 class="text-center">@ViewData["Title"]</h2>
+<!-- Style for the beautiful card view -->
+<style>
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
 
-<!-- Table to display items -->
-<table class="table table-striped table-hover">
-    <thead class="thead-dark">
-        <tr>
-            <th>Item Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Photo</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model != null && Model.Any())
-        {
-            foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.Name</td>
-                    <td>@item.Description</td>
-                    <td>@String.Format("{0:C}", item.Price)</td> <!-- Formats as currency -->
-                    <td>@item.Quantity</td>
-                    <td>
-                        @if (!string.IsNullOrEmpty(item.PhotoUrl))
-                        {
-                            <!-- Use the API base URL to reference the image -->
-                            <img src="@($"{apiBaseUrl}{item.PhotoUrl}")"
-                                 alt="@item.Name" class="img-thumbnail"
-                                 style="max-width: 100px; max-height: 100px;" />
-                        }
-                        else
-                        {
-                            <span>No image</span>
-                        }
-                    </td>
-                    <td>
-                        <!-- Action buttons -->
-                        <a href="/Items/Details/@item.Id" class="btn btn-info btn-sm">Details</a>
-                        <a asp-action="UpdateItem" asp-route-itemId="@item.Id" class="btn btn-warning btn-sm">Edit</a>
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        width: 250px;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, background-color 0.3s;
+        display: flex; /* Align vertically */
+        flex-direction: column; /* Align items vertically */
+        justify-content: space-between; /* Distribute space */
+        background-color: #fff9e6; /* Light yellow background */
+    }
 
-                        <!-- Delete button -->
-                        <a asp-action="DeleteItem" asp-route-itemId="@item.Id" class="btn btn-danger btn-sm">Delete</a>
-                    </td>
-                </tr>
-            }
+    .card:hover {
+        background-color: #f8f9fa; /* Subtle hover effect */
+        transform: translateY(-5px); /* Smooth hover movement */
+    }
+
+    .card img {
+        max-width: 100%;
+        height: 150px; /* Fixed height for uniformity */
+        object-fit: cover; /* Ensures aspect ratio is maintained */
+        border-radius: 5px;
+    }
+
+    .card-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 10px;
+        color: #007bff;
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+
+    .card-title:hover {
+        color: #0056b3;
+        text-decoration: underline;
+    }
+
+    .card-price {
+        font-size: 16px;
+        color: #28a745;
+        font-weight: bold;
+        margin: 10px 0;
+    }
+
+    .card-description {
+        font-size: 14px;
+        color: #6c757d;
+        margin-bottom: 15px;
+        flex-grow: 1; /* Allows description to fill available space */
+    }
+
+    /* Responsive grid for mobile view */
+    @@media (max-width: 768px) {
+        .card-container {
+            flex-direction: column;
+            align-items: center;
         }
-        else
-        {
-            <tr>
-                <td colspan="6" class="text-center">No items found.</td>
-            </tr>
-        }
-    </tbody>
-</table>
+    }
+</style>
 
-<div class="text-center">
-    <!-- Updated link to point to the CreateItem action -->
-    <a href="@Url.Action("CreateItem", "Item")" class="btn btn-primary">Add New Item</a>
+<!-- Card container to hold the items -->
+<div class="card-container">
+    @if (Model != null && Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            <div class="card">
+                <!-- Image that links to the item details page -->
+                <a href="@Url.Action("GetItem", "Item", new { id = item.Id })">
+                    <img src="@($"{apiBaseUrl}{item.PhotoUrl}")" alt="@item.Name" class="img-fluid" />
+                </a>
+
+                <!-- Title as a clickable link -->
+                <a href="@Url.Action("GetItem", "Item", new { id = item.Id })" class="card-title">@item.Name</a>
+
+                <!-- Price formatted as currency -->
+                <div class="card-price">@String.Format("{0:C}", item.Price)</div>
+
+                <!-- Item description -->
+                <p class="card-description">@item.Description</p>
+            </div>
+        }
+    }
+    else
+    {
+        <p class="text-center">No items found.</p>
+    }
 </div>

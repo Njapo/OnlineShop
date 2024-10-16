@@ -26,6 +26,19 @@ namespace OnlineShop_Web.Controllers
             return View(items);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            var response = await _itemService.GetAsync<APIResponse>(id);
+            var item = JsonConvert.DeserializeObject<ItemDTO>(Convert.ToString(response.Result));
+            if (item == null)
+            {
+                RedirectToAction(nameof(IndexItem));
+            }
+
+            return View(item);
+        }
+
         public async Task<IActionResult> CreateItem()
         {
             return View();
