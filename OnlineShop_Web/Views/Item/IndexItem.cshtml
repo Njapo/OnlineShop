@@ -1,8 +1,9 @@
 ﻿@model List<OnlineShop_Web.Models.ItemDTO>
 @{
     var apiBaseUrl = "https://localhost:7002";  // Base URL for your API project
+    var isAdmin = Context.Session.GetString("IsLoggedIn") == "true" && Context.Session.GetString("UserRole") == "Admin";
 }
-
+ 
 <!-- Style for the beautiful card view -->
 <style>
     .card-container {
@@ -66,6 +67,38 @@
         flex-grow: 1; /* Allows description to fill available space */
     }
 
+    /* Edit and Delete buttons */
+    .admin-actions {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 15px;
+    }
+
+    .admin-actions a {
+        color: white;
+        padding: 8px 12px;
+        border-radius: 5px;
+        font-size: 14px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+    .admin-actions .btn-edit {
+        background-color: #ffc107; /* Yellow */
+    }
+
+    .admin-actions .btn-edit:hover {
+        background-color: #e0a800;
+    }
+
+    .admin-actions .btn-delete {
+        background-color: #dc3545; /* Red */
+    }
+
+    .admin-actions .btn-delete:hover {
+        background-color: #c82333;
+    }
+
     /* Responsive grid for mobile view */
     @@media (max-width: 768px) {
         .card-container {
@@ -95,6 +128,22 @@
 
                 <!-- Item description -->
                 <p class="card-description">@item.Description</p>
+
+                <!-- Show Edit/Delete buttons only for Admins -->
+                @if (isAdmin)
+                {
+                    <div class="admin-actions">
+                        <!-- Edit button -->
+                        <a href="@Url.Action("UpdateItem", "Item", new { id = item.Id })" class="btn-edit">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+
+                        <!-- Delete button -->
+                        <a href="@Url.Action("DeleteItem", "Item", new { itemId = item.Id })" class="btn-delete" onclick="return confirm('Are you sure you want to delete this item?');">
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </a>
+                    </div>
+                }
             </div>
         }
     }

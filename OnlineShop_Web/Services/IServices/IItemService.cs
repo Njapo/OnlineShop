@@ -6,8 +6,9 @@ namespace OnlineShop_Web.Services.IServices
     {
         Task<T> GetAllAsync<T>();
         Task<T> GetAsync<T>(int id);
-        Task<T> CreateAsync<T>(ItemCreateDTO dto);
-        Task<T> UpdateAsync<T>(ItemUpdateDTO dto);
-        Task<T> DeleteAsync<T>(int id);
+        Task<T> GetByNameAsync<T>(string name);
+        Task<T> CreateAsync<T>(ItemCreateDTO dto, string token);
+        Task<T> UpdateAsync<T>(ItemUpdateDTO dto, string token);
+        Task<T> DeleteAsync<T>(int id, string token);
     }
 }

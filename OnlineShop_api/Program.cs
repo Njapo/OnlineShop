@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
@@ -19,6 +20,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
 });
+builder.Services.AddResponseCaching();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IItemRepository,ItemRepository>();
 builder.Services.AddAutoMapper(typeof(MappingConfig));
@@ -47,7 +49,13 @@ builder.Services.AddAuthentication(x =>
 
 //builder.Host.UseSerilog();
 
-builder.Services.AddControllers().AddNewtonsoftJson();
+builder.Services.AddControllers(option => { 
+    option.CacheProfiles.Add("Default30",
+    new CacheProfile()
+    {
+        Duration = 30
+    });
+}).AddNewtonsoftJson();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options => {

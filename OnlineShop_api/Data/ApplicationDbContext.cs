@@ -9,8 +9,8 @@ namespace OnlineShop_api.Data
             : base(options)
         {  
         }
+        
         public DbSet<LocalUser> LocalUsers{ get; set; }
-
         public DbSet<Item> Items{ get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -123,6 +123,61 @@ namespace OnlineShop_api.Data
             Price = 49.99m,
             Quantity = 90,
             PhotoUrl = "/Images/Items/fitness_tracker.jpg",
+            CreatedDate = DateTime.Now,
+            UpdatedDate = DateTime.Now
+        },
+        new Item
+        {
+            Id = 17,
+            Name = "Wireless Keyboard",
+            Description = "Slim wireless keyboard with quiet keys and long battery life",
+            Price = 39.99m,
+            Quantity = 100,
+            PhotoUrl = "/Images/Items/wireless_keyboard.jpg",
+            CreatedDate = DateTime.Now,
+            UpdatedDate = DateTime.Now
+        },
+        new Item
+        {
+            Id = 18,
+            Name = "4K TV",
+            Description = "55-inch 4K Ultra HD Smart TV with HDR",
+            Price = 799.99m,
+            Quantity = 15,
+            PhotoUrl = "/Images/Items/4k_tv.jpg",
+            CreatedDate = DateTime.Now,
+            UpdatedDate = DateTime.Now
+        },
+        new Item
+        {
+            Id = 19,
+            Name = "Drone",
+            Description = "Quadcopter drone with 4K camera and GPS",
+            Price = 499.99m,
+            Quantity = 10,
+            PhotoUrl = "/Images/Items/drone.jpg",
+            CreatedDate = DateTime.Now,
+            UpdatedDate = DateTime.Now
+        },
+        new Item
+        {
+            Id = 20,
+            Name = "Electric Scooter",
+            Description = "Foldable electric scooter with a top speed of 25 km/h",
+            Price = 349.99m,
+            Quantity = 20,
+            PhotoUrl = "/Images/Items/electric_scooter.jpg",
+            CreatedDate = DateTime.Now,
+            UpdatedDate = DateTime.Now
+        },
+        new Item
+        {
+            Id = 21,
+            Name = "Home Security Camera",
+            Description = "Indoor/outdoor security camera with motion detection and night vision",
+            Price = 99.99m,
+            Quantity = 50,
+            PhotoUrl = "/Images/Items/home_security_camera.jpg",
             CreatedDate = DateTime.Now,
             UpdatedDate = DateTime.Now
         });

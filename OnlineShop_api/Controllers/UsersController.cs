@@ -19,7 +19,7 @@ namespace OnlineShop_api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Logon([FromBody]LoginRequestDTO model)
+        public async Task<IActionResult> Login([FromBody]LoginRequestDTO model)
         {
             var loginResponse = await _userRepository.Login(model);
             if (loginResponse == null || string.IsNullOrEmpty(loginResponse.Token))
@@ -36,7 +36,7 @@ namespace OnlineShop_api.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Logon([FromBody] RegistrationRequstDTO model)
+        public async Task<IActionResult> Register([FromBody] RegistrationRequstDTO model)
         {
             bool isUniqueUser = _userRepository.IsUniqueUser(model.UserName);
             if (!isUniqueUser)

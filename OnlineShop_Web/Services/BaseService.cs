@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using OnlineShop_Utility;
 using OnlineShop_Web.Models;
 using OnlineShop_Web.Services.IServices;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace OnlineShop_Web.Services
@@ -47,6 +48,11 @@ namespace OnlineShop_Web.Services
                 }
 
                 HttpResponseMessage apiResponse = null;
+
+                if(!string.IsNullOrEmpty(apiRequest.Token))
+                {
+                    client.DefaultRequestHeaders.Authorization=new AuthenticationHeaderValue("Bearer",apiRequest.Token);
+                }
 
                 apiResponse =await client.SendAsync(message);
 

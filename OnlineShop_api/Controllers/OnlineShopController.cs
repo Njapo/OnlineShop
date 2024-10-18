@@ -32,6 +32,7 @@ namespace OnlineShop_api.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ResponseCache(CacheProfileName= "Default30")]
         public async Task<ActionResult<APIResponse>> GetItems()
         {
             try
@@ -115,8 +116,48 @@ namespace OnlineShop_api.Controllers
             return _response;
         }
 
+         
+        [HttpGet("search")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<APIResponse>> GetItemsByName(string name)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(name))
+                {
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    _response.ErrorMessages = new List<string> { "Name parameter is required" };
+                    return BadRequest(_response);
+                }
+
+                var items = await _dbItem.GetAll(it => it.Name.ToLower().Contains(name.ToLower()));
+
+                if (items == null || !items.Any())
+                {
+                    _response.StatusCode = HttpStatusCode.NotFound;
+                    _response.ErrorMessages = new List<string> { $"No items found matching the name: {name}" };
+                    return NotFound(_response);
+                }
+
+                _response.Result = _mapper.Map<List<ItemDTO>>(items);
+                _response.StatusCode = HttpStatusCode.OK;
+                return Ok(_response);
+
+            }
+            catch (Exception ex)
+            {
+                APIResponse.FailedResponse(_response, ex);
+            }
+
+            return _response;
+        }
+
+
+
+
         [HttpDelete("{id:int}",Name ="DeleteItem")]
-        [Authorize(Roles = "Admin,Moderator")]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

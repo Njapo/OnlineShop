@@ -7,6 +7,7 @@ using OnlineShop_Utility;
 using OnlineShop_Web.Models;
 using OnlineShop_Web.Models.Dto;
 using OnlineShop_Web.Services.IServices;
+using System.Security.Claims;
 
 namespace OnlineShop_Web.Controllers
 {
@@ -33,8 +34,15 @@ namespace OnlineShop_Web.Controllers
             if(response!=null && response.IsSuccess)
             {
                 LoginResponseDTO  model=JsonConvert.DeserializeObject<LoginResponseDTO>(Convert.ToString(response.Result));
+                var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+                identity.AddClaim(new Claim(ClaimTypes.Name, model.User.UserName));
+                identity.AddClaim(new Claim(ClaimTypes.Role, model.User.Role.ToString()));
+                var principal = new ClaimsPrincipal(identity);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
                 HttpContext.Session.SetString(SD.SessionToken,model.Token);
                 HttpContext.Session.SetString("IsLoggedIn", "true");
+                HttpContext.Session.SetString("UserRole", model.User.Role.ToString());
                 return RedirectToAction("IndexItem","Item");
             }
             else

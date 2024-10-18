@@ -1,6 +1,8 @@
-﻿using AutoMapper;
+﻿//using AspNetCore;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using OnlineShop_Utility;
 using OnlineShop_Web.Models;
 using OnlineShop_Web.Services.IServices;
 using System.Reflection;
@@ -33,10 +35,22 @@ namespace OnlineShop_Web.Controllers
             var item = JsonConvert.DeserializeObject<ItemDTO>(Convert.ToString(response.Result));
             if (item == null)
             {
-                RedirectToAction(nameof(IndexItem));
+               return RedirectToAction(nameof(IndexItem));
             }
 
             return View(item);
+        }
+
+        [HttpGet("Item/GetItemsByName")]
+        public async Task<IActionResult> GetItemByName(string name)
+        {
+            var response=await _itemService.GetByNameAsync<APIResponse>(name);
+            var items = JsonConvert.DeserializeObject<List<ItemDTO>>(Convert.ToString(response.Result));
+            if(items != null)
+            {
+                return View("IndexItem", items);
+            }
+            return RedirectToAction(nameof(IndexItem));
         }
 
         public async Task<IActionResult> CreateItem()
@@ -50,7 +64,7 @@ namespace OnlineShop_Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _itemService.CreateAsync<APIResponse>(model);
+                var response = await _itemService.CreateAsync<APIResponse>(model,HttpContext.Session.GetString(SD.SessionToken));
                 if (response != null && response.IsSuccess)
                 {
                     return RedirectToAction(nameof(IndexItem));
@@ -76,7 +90,7 @@ namespace OnlineShop_Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _itemService.UpdateAsync<APIResponse>(model);
+                var response = await _itemService.UpdateAsync<APIResponse>(model, HttpContext.Session.GetString(SD.SessionToken));
                 if (response != null && response.IsSuccess)
                 {
                     return RedirectToAction(nameof(IndexItem));
@@ -92,7 +106,7 @@ namespace OnlineShop_Web.Controllers
             if (response != null && response.IsSuccess)
             {
                 ItemDTO model = JsonConvert.DeserializeObject<ItemDTO>(Convert.ToString(response.Result));
-                await _itemService.DeleteAsync<APIResponse>(model.Id);
+                await _itemService.DeleteAsync<APIResponse>(model.Id, HttpContext.Session.GetString(SD.SessionToken));
                 
                 return RedirectToAction(nameof(IndexItem));
             }

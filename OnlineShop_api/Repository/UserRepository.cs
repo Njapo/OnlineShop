@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using OnlineShop_api.Data;
 using OnlineShop_api.Models;
@@ -33,7 +34,7 @@ namespace OnlineShop_api.Repository
 
         public async Task<LoginResponseDTO> Login(LoginRequestDTO loginRequestDTO)
         {
-            var user=_db.LocalUsers.FirstOrDefault(u=>u.UserName.ToLower()==loginRequestDTO.UserName.ToLower()
+            var user=await _db.LocalUsers.FirstOrDefaultAsync(u=>u.UserName.ToLower()==loginRequestDTO.UserName.ToLower()
             && u.Password==loginRequestDTO.Password);
             if(user == null)
             {
@@ -64,7 +65,7 @@ namespace OnlineShop_api.Repository
         }
 
         public async Task<LocalUser> Register(RegistrationRequstDTO registrationRequstDTO)
-        {
+        {   
             var user=_mapper.Map<LocalUser>(registrationRequstDTO);
             _db.LocalUsers.Add(user);
             await _db.SaveChangesAsync();

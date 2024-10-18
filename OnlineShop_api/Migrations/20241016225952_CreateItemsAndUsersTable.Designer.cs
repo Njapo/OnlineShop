@@ -12,8 +12,8 @@ using OnlineShop_api.Data;
 namespace OnlineShop_api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241013201803_addUserLocalTable")]
-    partial class addUserLocalTable
+    [Migration("20241016225952_CreateItemsAndUsersTable")]
+    partial class CreateItemsAndUsersTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,57 +63,112 @@ namespace OnlineShop_api.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 10, 14, 0, 18, 3, 479, DateTimeKind.Local).AddTicks(3440),
+                            CreatedDate = new DateTime(2024, 10, 17, 2, 59, 52, 333, DateTimeKind.Local).AddTicks(303),
                             Description = "Latest smartphone with 128GB storage",
                             Name = "Smartphone",
                             PhotoUrl = "/Images/Items/smartphone.jpg",
                             Price = 599.99m,
                             Quantity = 50,
-                            UpdatedDate = new DateTime(2024, 10, 14, 0, 18, 3, 479, DateTimeKind.Local).AddTicks(3450)
+                            UpdatedDate = new DateTime(2024, 10, 17, 2, 59, 52, 333, DateTimeKind.Local).AddTicks(317)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 10, 14, 0, 18, 3, 479, DateTimeKind.Local).AddTicks(3452),
+                            CreatedDate = new DateTime(2024, 10, 17, 2, 59, 52, 333, DateTimeKind.Local).AddTicks(319),
                             Description = "High-performance laptop for gaming and work",
                             Name = "Laptop",
                             PhotoUrl = "/Images/Items/laptop.jpg",
                             Price = 1299.99m,
                             Quantity = 30,
-                            UpdatedDate = new DateTime(2024, 10, 14, 0, 18, 3, 479, DateTimeKind.Local).AddTicks(3453)
+                            UpdatedDate = new DateTime(2024, 10, 17, 2, 59, 52, 333, DateTimeKind.Local).AddTicks(320)
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 10, 14, 0, 18, 3, 479, DateTimeKind.Local).AddTicks(3455),
+                            CreatedDate = new DateTime(2024, 10, 17, 2, 59, 52, 333, DateTimeKind.Local).AddTicks(321),
                             Description = "Noise-cancelling over-ear headphones",
                             Name = "Headphones",
                             PhotoUrl = "/Images/Items/headphones.jpeg",
                             Price = 199.99m,
                             Quantity = 100,
-                            UpdatedDate = new DateTime(2024, 10, 14, 0, 18, 3, 479, DateTimeKind.Local).AddTicks(3455)
+                            UpdatedDate = new DateTime(2024, 10, 17, 2, 59, 52, 333, DateTimeKind.Local).AddTicks(321)
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2024, 10, 14, 0, 18, 3, 479, DateTimeKind.Local).AddTicks(3457),
+                            CreatedDate = new DateTime(2024, 10, 17, 2, 59, 52, 333, DateTimeKind.Local).AddTicks(323),
                             Description = "Waterproof smartwatch with heart rate monitor",
                             Name = "Smartwatch",
                             PhotoUrl = "/Images/Items/smartwatch.jpg",
                             Price = 149.99m,
                             Quantity = 75,
-                            UpdatedDate = new DateTime(2024, 10, 14, 0, 18, 3, 479, DateTimeKind.Local).AddTicks(3457)
+                            UpdatedDate = new DateTime(2024, 10, 17, 2, 59, 52, 333, DateTimeKind.Local).AddTicks(323)
                         },
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2024, 10, 14, 0, 18, 3, 479, DateTimeKind.Local).AddTicks(3459),
+                            CreatedDate = new DateTime(2024, 10, 17, 2, 59, 52, 333, DateTimeKind.Local).AddTicks(324),
                             Description = "Digital SLR camera with 24.2 MP sensor",
                             Name = "Camera",
                             PhotoUrl = "/Images/Items/camera.jpeg",
                             Price = 899.99m,
                             Quantity = 20,
-                            UpdatedDate = new DateTime(2024, 10, 14, 0, 18, 3, 479, DateTimeKind.Local).AddTicks(3459)
+                            UpdatedDate = new DateTime(2024, 10, 17, 2, 59, 52, 333, DateTimeKind.Local).AddTicks(325)
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CreatedDate = new DateTime(2024, 10, 17, 2, 59, 52, 333, DateTimeKind.Local).AddTicks(326),
+                            Description = "Lightweight tablet with 64GB storage and stylus support",
+                            Name = "Tablet",
+                            PhotoUrl = "/Images/Items/tablet.jpg",
+                            Price = 399.99m,
+                            Quantity = 40,
+                            UpdatedDate = new DateTime(2024, 10, 17, 2, 59, 52, 333, DateTimeKind.Local).AddTicks(327)
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CreatedDate = new DateTime(2024, 10, 17, 2, 59, 52, 333, DateTimeKind.Local).AddTicks(328),
+                            Description = "Portable Bluetooth speaker with deep bass",
+                            Name = "Bluetooth Speaker",
+                            PhotoUrl = "/Images/Items/bluetooth_speaker.jpg",
+                            Price = 79.99m,
+                            Quantity = 80,
+                            UpdatedDate = new DateTime(2024, 10, 17, 2, 59, 52, 333, DateTimeKind.Local).AddTicks(328)
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CreatedDate = new DateTime(2024, 10, 17, 2, 59, 52, 333, DateTimeKind.Local).AddTicks(330),
+                            Description = "Ergonomic gaming mouse with customizable buttons",
+                            Name = "Gaming Mouse",
+                            PhotoUrl = "/Images/Items/gaming_mouse.jpg",
+                            Price = 59.99m,
+                            Quantity = 60,
+                            UpdatedDate = new DateTime(2024, 10, 17, 2, 59, 52, 333, DateTimeKind.Local).AddTicks(330)
+                        },
+                        new
+                        {
+                            Id = 15,
+                            CreatedDate = new DateTime(2024, 10, 17, 2, 59, 52, 333, DateTimeKind.Local).AddTicks(332),
+                            Description = "1TB external hard drive for data backup",
+                            Name = "External Hard Drive",
+                            PhotoUrl = "/Images/Items/external_hard_drive.jpg",
+                            Price = 89.99m,
+                            Quantity = 25,
+                            UpdatedDate = new DateTime(2024, 10, 17, 2, 59, 52, 333, DateTimeKind.Local).AddTicks(332)
+                        },
+                        new
+                        {
+                            Id = 16,
+                            CreatedDate = new DateTime(2024, 10, 17, 2, 59, 52, 333, DateTimeKind.Local).AddTicks(333),
+                            Description = "Wearable fitness tracker with sleep monitoring",
+                            Name = "Fitness Tracker",
+                            PhotoUrl = "/Images/Items/fitness_tracker.jpg",
+                            Price = 49.99m,
+                            Quantity = 90,
+                            UpdatedDate = new DateTime(2024, 10, 17, 2, 59, 52, 333, DateTimeKind.Local).AddTicks(334)
                         });
                 });
 
