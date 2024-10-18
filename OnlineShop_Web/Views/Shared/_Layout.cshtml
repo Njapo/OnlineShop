@@ -16,26 +16,36 @@
         .navbar-custom {
             background-color: #1f3c88; /* Dark Blue */
             padding: 15px;
+            position: fixed; /* Make the navbar fixed */
+            top: 0;
+            left: 0;
+            width: 100%; /* Ensure it spans the full width */
+            z-index: 1000; /* Make sure it stays on top of other content */
         }
 
-            .navbar-custom .navbar-brand {
-                color: #fff;
-                font-size: 24px;
-                font-weight: bold;
+        /* Add padding to the body to prevent content overlap with the fixed navbar */
+        body {
+            padding-top: 80px; /* Adjust based on the height of your navbar */
+        }
+
+        .navbar-custom .navbar-brand {
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar-custom .nav-link {
+            color: #fff !important;
+            font-size: 18px;
+        }
+
+            .navbar-custom .nav-link:hover {
+                color: #ffd700 !important; /* Gold on hover */
             }
 
-            .navbar-custom .nav-link {
-                color: #fff !important;
-                font-size: 18px;
-            }
-
-                .navbar-custom .nav-link:hover {
-                    color: #ffd700 !important; /* Gold on hover */
-                }
-
-            .navbar-custom .fa {
-                margin-right: 8px;
-            }
+        .navbar-custom .fa {
+            margin-right: 8px;
+        }
 
         .btn-signup {
             background-color: #ffd700; /* Gold button */
@@ -53,7 +63,7 @@
         /* Custom styling for the search bar */
         .search-bar {
             width: 100%;
-            max-width: 400px; /* Adjust max-width for responsiveness */
+            max-width: 500px; /* Adjusted max-width for larger search bar */
             background-color: #fff;
             border: none;
             border-radius: 50px;
@@ -128,7 +138,6 @@
                             </button>
                         </div>
                     </form>
-
 
                     <!-- Sign In / Sign Up or Profile Button -->
                     <ul class="navbar-nav">
